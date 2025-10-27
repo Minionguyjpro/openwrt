@@ -8,6 +8,7 @@ PHYNBR=${DEVPATH##*/phy}
 
 . /lib/functions.sh
 . /lib/functions/system.sh
+. /lib/functions/uci-defaults.sh
 . /lib/functions/k2t.sh
 
 board=$(board_name)
@@ -24,6 +25,10 @@ case "$board" in
 		[ "$PHYNBR" -eq 1 ] && \
 			mtd_get_mac_ascii art "protest_ath0_mac" > /sys${DEVPATH}/macaddress
 		;;
+    dlink,dap-1320-a1)
+        mtd_get_mac_text "art" 0xffa0 > /sys${DEVPATH}/macaddress
+        ucidef_set_label_macaddr $(mtd_get_mac_text "art" 0xffa0)
+        ;;
 	dlink,dap-2230-a1|\
 	dlink,dap-3320-a1)
 		mtd_get_mac_ascii bdcfg "wlanmac" > /sys${DEVPATH}/macaddress
