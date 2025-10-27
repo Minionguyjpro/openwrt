@@ -1094,12 +1094,21 @@ define Device/dlink_dap-13xx
 	append-rootfs | pad-rootfs | check-size | mkdapimg2 0xE0000
 endef
 
+define Device/dlink_dap-1320
+  DEVICE_VENDOR := D-Link
+  IMAGE_SIZE := 5312k
+  IMAGES := factory.bin sysupgrade.bin
+  IMAGE/default := append-kernel | pad-to $$$$(BLOCKSIZE) | \
+	append-rootfs | pad-rootfs | check-size
+endef
+
 define Device/dlink_dap-1320-a1
-  $(Device/dlink_dap-13xx)
+  $(Device/dlink_dap-1320)
+  SOC := ar9341
   DEVICE_MODEL := DAP-1320
   DEVICE_VARIANT := A1
-  DAP_SIGNATURE := HONEYBEE-FIRMWARE-DAP-1320
-  SUPPORTED_DEVICES += dap-1320-a1
+  IMAGE/factory.bin := $$(IMAGE/default) | \
+	append-string DB120AR9341-RP-120511-NA
 endef
 TARGET_DEVICES += dlink_dap-1320-a1
 
