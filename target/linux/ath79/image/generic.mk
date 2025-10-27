@@ -1087,6 +1087,15 @@ define Device/dlink_dap-13xx
 	append-rootfs | pad-rootfs | check-size | mkdapimg2 0xE0000
 endef
 
+define Device/dlink_dap-1320-a1
+  $(Device/dlink_dap-13xx)
+  DEVICE_MODEL := DAP-1320
+  DEVICE_VARIANT := A1
+  DAP_SIGNATURE := HONEYBEE-FIRMWARE-DAP-1320
+  SUPPORTED_DEVICES += dap-1320-a1
+endef
+TARGET_DEVICES += dlink_dap-1320-a1
+
 define Device/dlink_dap-1330-a1
   $(Device/dlink_dap-13xx)
   DEVICE_MODEL := DAP-1330
