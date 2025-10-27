@@ -21,6 +21,13 @@ define Build/addpattern
 	-mv "$@.new" "$@"
 endef
 
+define Build/append-md5sum-ascii-salted
+	cp $@ $@.salted
+	echo -ne $(1) >> $@.salted
+	$(STAGING_DIR_HOST)/bin/mkhash md5 $@.salted | xargs echo -ne >> $@
+	rm $@.salted
+endef
+
 define Build/append-md5sum-bin
 	$(MKHASH) md5 $@ | sed 's/../\\\\x&/g' |\
 		xargs echo -ne >> $@
