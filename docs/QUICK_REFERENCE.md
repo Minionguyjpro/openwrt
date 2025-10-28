@@ -27,9 +27,10 @@ This is a quick reference guide for comparing commits in your OpenWRT fork.
 git show <commit-hash>
 ```
 
-### 3. Compare your main commit with upstream
+### 3. Compare a specific commit with upstream
 ```bash
-./scripts/compare_commits.sh d07058c
+# Replace <commit-hash> with your actual commit hash (e.g., d07058c)
+./scripts/compare_commits.sh <commit-hash>
 ```
 
 ### 4. View commit history

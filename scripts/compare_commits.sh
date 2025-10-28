@@ -142,7 +142,7 @@ main() {
     echo ""
     
     # Check for help flag
-    if [ $# -eq 1 ] && { [ "$1" == "--help" ] || [ "$1" == "-h" ]; }; then
+    if [ $# -eq 1 ] && { [ "$1" = "--help" ] || [ "$1" = "-h" ]; }; then
         echo "Usage:"
         echo "  $0                    # Compare current branch with upstream"
         echo "  $0 <commit>           # Compare specific commit with upstream"
