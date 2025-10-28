@@ -25,10 +25,13 @@ case "$board" in
 		[ "$PHYNBR" -eq 1 ] && \
 			mtd_get_mac_ascii art "protest_ath0_mac" > /sys${DEVPATH}/macaddress
 		;;
-    dlink,dap-1320-a1)
-        mtd_get_mac_text "art" 0xffa0 > /sys${DEVPATH}/macaddress
-        ucidef_set_label_macaddr $(mtd_get_mac_text "art" 0xffa0)
-        ;;
+	dlink,dap-1120-a1|\
+	dlink,dap-1320-ax|\
+	dlink,dap-1320-bx|\
+	dlink,dap-1320-cx)
+		mtd_get_mac_text "art" 0xffa0 > /sys${DEVPATH}/macaddress
+		ucidef_set_label_macaddr $(mtd_get_mac_text "art" 0xffa0)
+		;;
 	dlink,dap-2230-a1|\
 	dlink,dap-3320-a1)
 		mtd_get_mac_ascii bdcfg "wlanmac" > /sys${DEVPATH}/macaddress

@@ -1094,23 +1094,54 @@ define Device/dlink_dap-13xx
 	append-rootfs | pad-rootfs | check-size | mkdapimg2 0xE0000
 endef
 
+define Device/dlink_dap-1120-a1
+  $(Device/dlink_dap-1320)
+  SOC := qca9533
+  DEVICE_MODEL := DAP-1120
+  DEVICE_VARIANT := A1
+  IMAGE/factory.bin := $$(IMAGE/default) | \
+	append-string AP143AR953x-RP-150515-NA
+endef
+TARGET_DEVICES += dlink_dap-1120-a1
+
 define Device/dlink_dap-1320
   DEVICE_VENDOR := D-Link
-  IMAGE_SIZE := 5312k
+  IMAGE_SIZE := 7808k
   IMAGES := factory.bin sysupgrade.bin
   IMAGE/default := append-kernel | pad-to $$$$(BLOCKSIZE) | \
 	append-rootfs | pad-rootfs | check-size
 endef
 
-define Device/dlink_dap-1320-a1
+define Device/dlink_dap-1320-ax
   $(Device/dlink_dap-1320)
   SOC := ar9341
   DEVICE_MODEL := DAP-1320
-  DEVICE_VARIANT := A1
+  DEVICE_VARIANT := Ax
   IMAGE/factory.bin := $$(IMAGE/default) | \
 	append-string DB120AR9341-RP-120511-NA
 endef
-TARGET_DEVICES += dlink_dap-1320-a1
+TARGET_DEVICES += dlink_dap-1320-ax
+
+define Device/dlink_dap-1320-bx
+  $(Device/dlink_dap-1320)
+  SOC := qca9533
+  DEVICE_MODEL := DAP-1320
+  DEVICE_VARIANT := Bx
+  IMAGE/factory.bin := $$(IMAGE/default) | \
+	append-string AP143AR953x-AP-140102-NA
+endef
+TARGET_DEVICES += dlink_dap-1320-bx
+
+define Device/dlink_dap-1320-cx
+  $(Device/dlink_dap-1320)
+  SOC := qca9533
+  DEVICE_MODEL := DAP-1320
+  DEVICE_VARIANT := Cx
+  IMAGE/factory.bin := $$(IMAGE/default) | \
+	append-md5sum-ascii-salted ffff | \
+	append-string AP143AR953x-RP-150525-NA
+endef
+TARGET_DEVICES += dlink_dap-1320-cx
 
 define Device/dlink_dap-1330-a1
   $(Device/dlink_dap-13xx)
