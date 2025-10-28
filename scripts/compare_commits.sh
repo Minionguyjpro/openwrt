@@ -141,6 +141,23 @@ main() {
     print_info "OpenWRT Commit Comparison Tool"
     echo ""
     
+    # Check for help flag
+    if [ $# -eq 1 ] && { [ "$1" == "--help" ] || [ "$1" == "-h" ]; }; then
+        echo "Usage:"
+        echo "  $0                    # Compare current branch with upstream"
+        echo "  $0 <commit>           # Compare specific commit with upstream"
+        echo "  $0 <commit1> <commit2> # Compare two specific commits"
+        echo ""
+        echo "Examples:"
+        echo "  $0                    # Compare HEAD with upstream/master"
+        echo "  $0 d07058c            # Compare commit d07058c with upstream"
+        echo "  $0 HEAD~5 HEAD        # Compare last 5 commits"
+        echo ""
+        echo "Options:"
+        echo "  -h, --help            Show this help message"
+        exit 0
+    fi
+    
     # Parse arguments
     if [ $# -eq 0 ]; then
         # No arguments: compare current branch with upstream
